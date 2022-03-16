@@ -10,7 +10,7 @@ def index(request):
     }
     return render(request, 'recipes/recipes.html', context)
 
-def recipe(request):
+def recipe(request, recipe_id):
     return render(request, 'recipes/recipe.html')
 
 def search(request):
