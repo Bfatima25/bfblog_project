@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 import django_on_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-redhl9-%5$1$5qao45tvsi9+wnu#40q8v(#iy$re)yki2ftmkg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'bfblog-project.herokuapp.com']
 
 
 # Application definition
@@ -90,6 +91,8 @@ DATABASES = {
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -125,10 +128,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_ROOT= os.path.join(BASE_DIR, 'static')
-STATIC_URL = '/static/'
+STATIC_ROOT= os.path.join(BASE_DIR, 'bfblog/static/')
+STATIC_URL = 'bfblog/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'bfblog/static')
+    os.path.join(BASE_DIR, 'bfblog/static/')
 ]
 
 # Media Folder Settings
@@ -146,4 +149,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_on_heroku.settings(locals())
