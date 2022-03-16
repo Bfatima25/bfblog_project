@@ -3,10 +3,10 @@ from django.shortcuts import render
 from .models import Recipe
 
 def index(request):
-    recipes = Recipe.objects.all()
+    recipe = Recipe.objects.order_by('-list_date').filter(is_published=True)
 
     context = {
-        'recipes': recipes
+        'recipes': recipe
     }
     return render(request, 'recipes/recipes.html', context)
 
