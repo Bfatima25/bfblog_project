@@ -5,12 +5,12 @@ from django.contrib.auth.models import User
 def register(request):
     if request.method == 'POST':
         # Get form values
-        first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
+        first_name=request.POST.get("first_name", "default value")
+        last_name=request.POST.get("last_name", "default value")
         username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        password2 = request.POST['password2']
+        email=request.POST.get("email", "default value")
+        password=request.POST.get("password", "default value")
+        password2=request.POST.get("password2", "default value")
 
         # check if passwords match
         if password == password2:
@@ -34,8 +34,8 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username=request.POST.get("username", "default value")
+        password=request.POST.get("password", "default value")
 
         user = auth.authenticate(username=username, password=password)
 
