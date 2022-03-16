@@ -1,1 +1,114 @@
-<h1>recipe</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h1 class="display-4">{{ recipe.title }}</h1>
+          <p class="lead">
+            {{ recipe.Mealtype }}- {{ recipe.Specialdiet }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section id="bc" class="mt-3">
+    <div class="container">
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'index' %}">Home</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url 'recipes' %}">Recipes</a>
+          </li>
+          <li class="breadcrumb-item active">{{ recipe.title }}</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Listing -->
+  <section id="recipe" class="py-4">
+    <div class="container">
+      <a href="{% url 'recipes' %}" class="btn btn-light mb-4">Back To Recipes</a>
+      <div class="row">
+        <div class="col-md-9">
+          <!-- Home Main Image -->
+          <img src="{{ recipe.photo_main.url }}" alt="" class="img-main img-fluid mb-3">
+          <!-- Thumbnails -->
+          <div class="row mb-5 thumbs">
+              {% if recipe.photo_1 %}
+            <div class="col-md-2">
+              <a href="{{ recipe.photo_1.url }}">
+                <img src="{{ recipe.photo_1.url }}" alt="" class="img-fluid">
+              </a>
+            </div>
+            {% endif %}
+            {% if recipe.photo_2 %}
+            <div class="col-md-2">
+              <a href="{{ recipe.photo_2.url }}">
+                <img src="{{ recipe.photo_2.url }}" alt="" class="img-fluid">
+              </a>
+            </div>
+            {% endif %}
+            {% if recipe.photo_3 %}
+            <div class="col-md-2">
+              <a href="{{ recipe.photo_3.url }}">
+                <img src="{{ recipe.photo_3.url }}" alt="" class="img-fluid">
+              </a>
+            </div>
+            {% endif %}
+            {% if recipe.photo_4 %}
+            <div class="col-md-2">
+              <a href="{{ recipe.photo_4.url }}">
+                <img src="{{ recipe.photo_4.url }}" alt="" class="img-fluid">
+              </a>
+            </div>
+            {% endif %}
+          </div>
+          <!-- Fields -->
+          <div class="row mb-5 fields">
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item text-secondary">
+                  <i class="fas fa-clock"></i> PrepTime:
+                  <span class="float-right">{{ recipe.preptime }}</span>
+                </li>
+                <li class="list-group-item text-secondary">
+                  <i class="fas fa-clock"></i> TotalTime:
+                  <span class="float-right">{{ recipe.totaltime }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item text-secondary">
+                  <i class="fas fa-calendar"></i> Date Posted:
+                  <span class="float-right">{{ recipe.list_date }}</span>
+                </li>
+                <li class="list-group-item text-secondary">
+                    <i class="fas fa-square"></i> Ingredients:
+                    <span class="float-right">{{ recipe.Ingredients }}
+                    </span>
+                  </li>
+                <li class="list-group-item text-secondary">
+                    <i class="fas fa-square"></i> Directions:
+                    <span class="float-right">{{ recipe.Directions }}
+                    </span>
+                </li>
+                <li class="list-group-item text-secondary">
+                  <i class="fas fa-user"></i> Chef:
+                  <span class="float-right">{{ recipe.employer }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
